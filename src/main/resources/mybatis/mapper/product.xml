@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycompany.webapp.dao.ProductDao">
+	<select id="selectProductsWithLarge" parameterType="HashMap"
+		resultType="product">
+		<![CDATA[
+		SELECT rnum, pid, bname, clarge, cmedium, csmall,
+			   pno, pname, pprice, pdetail, pseason, ptotalamount
+		FROM (
+		        SELECT ROWNUM as rnum, pid, bname, clarge, cmedium, csmall,
+								 pno, pname, pprice, pdetail, pseason, ptotalamount
+		        FROM (
+		            SELECT p.pid as pid, b.bname as bname, p.clarge as clarge, p.cmedium as cmedium, p.csmall as csmall,
+						   p.pno as pno, p.pname as pname, p.pprice as pprice, p.pdetail as pdetail, p.pseason as pseason,
+						   p.ptotalamount as ptotalamount
+		            FROM product p, brand b
+		            WHERE p.clarge = #{category.clarge}
+					AND p.cmedium LIKE '%'
+					AND p.csmall LIKE '%'
+		            AND b.bno = p.bno
+		        )
+		        WHERE ROWNUM <= #{pager.endRowNo}
+		)
+		WHERE rnum >= #{pager.startRowNo}
+		]]>
+	</select>
+	<select id="selectProductsWithMedium" parameterType="HashMap"
+		resultType="product">
+		<![CDATA[
+		SELECT rnum, pid, bname, clarge, cmedium, csmall,
+			   pno, pname, pprice, pdetail, pseason, ptotalamount
+		FROM (
+		        SELECT ROWNUM as rnum, pid, bname, clarge, cmedium, csmall,
+								 pno, pname, pprice, pdetail, pseason, ptotalamount
+		        FROM (
+		            SELECT p.pid as pid, b.bname as bname, p.clarge as clarge, p.cmedium as cmedium, p.csmall as csmall,
+						   p.pno as pno, p.pname as pname, p.pprice as pprice, p.pdetail as pdetail, p.pseason as pseason,
+						   p.ptotalamount as ptotalamount
+		            FROM product p, brand b
+		            WHERE p.clarge = #{category.clarge}
+					AND p.cmedium = #{category.cmedium}
+					AND p.csmall LIKE '%'
+		            AND b.bno = p.bno
+		        )
+		        WHERE ROWNUM <= #{pager.endRowNo}
+		)
+		WHERE rnum >= #{pager.startRowNo}
+		]]>
+	</select>
+	<select id="selectProductsWithSmall" parameterType="HashMap"
+		resultType="product">
+		<![CDATA[
+		SELECT rnum, pid, bname, clarge, cmedium, csmall,
+			   pno, pname, pprice, pdetail, pseason, ptotalamount
+		FROM (
+		        SELECT ROWNUM as rnum, pid, bname, clarge, cmedium, csmall,
+								 pno, pname, pprice, pdetail, pseason, ptotalamount
+		        FROM (
+		            SELECT p.pid as pid, b.bname as bname, p.clarge as clarge, p.cmedium as cmedium, p.csmall as csmall,
+						   p.pno as pno, p.pname as pname, p.pprice as pprice, p.pdetail as pdetail, p.pseason as pseason,
+						   p.ptotalamount as ptotalamount
+		            FROM product p, brand b
+		            WHERE p.clarge = #{category.clarge}
+					AND p.cmedium = #{category.cmedium}
+					AND p.csmall = #{category.csmall}
+		            AND b.bno = p.bno
+		        )
+		        WHERE ROWNUM <= #{pager.endRowNo}
+		)
+		WHERE rnum >= #{pager.startRowNo}
+		]]>
+	</select>
+	<select id="selectProductWithPno" parameterType="int"
+		resultType="product">
+		SELECT p.pid as pid, b.bname as bname, p.clarge as clarge,
+		p.cmedium as cmedium, p.csmall as csmall,
+		p.pno as pno, p.pname as
+		pname,
+		p.pprice as pprice, p.pdetail as pdetail, p.pseason as pseason,
+		p.ptotalamount as ptotalamount
+		FROM product p, brand b
+		WHERE pno =
+		#{pno}
+		AND b.bno = p.bno
+	</select>
+	<select id="countProductsWithLarge" parameterType="category"
+		resultType="int">
+		SELECT
+		COUNT(pno)
+		FROM product
+		WHERE clarge = #{clarge}
+		AND
+		cmedium LIKE '%'
+		AND csmall LIKE '%'
+	</select>
+	<select id="countProductsWithMedium" parameterType="category"
+		resultType="int">
+		SELECT
+		COUNT(pno)
+		FROM product
+		WHERE clarge = #{clarge}
+		AND
+		cmedium = #{cmedium}
+		AND csmall LIKE '%'
+	</select>
+	<select id="countProductsWithSmall" parameterType="category"
+		resultType="int">
+		SELECT
+		COUNT(pno)
+		FROM product
+		WHERE clarge = #{clarge}
+		AND
+		cmedium = #{cmedium}
+		AND csmall = #{csmall}
+	</select>
+	<select id="selectProductColors" parameterType="String"
+		resultType="color">
+		SELECT
+		pid, ccolorcode, cimage1, cimage2, cimage3, ccolorimage, cmatchpid
+		FROM color
+		WHERE pid = #{pid}
+	</select>
+	<select id="selectProductStock" parameterType="HashMap"
+		resultType="stock">
+		SELECT
+		pid, ccolorcode, ssize, samount
+		FROM stock
+		WHERE pid = #{pid}
+		AND ccolorcode = #{colorcode}
+	</select>
+</mapper>
+
+

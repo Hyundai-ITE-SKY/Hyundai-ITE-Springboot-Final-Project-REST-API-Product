@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
-  
+
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.mycompany.webapp.dto.Board" alias="board"/>
-		<typeAlias type="com.mycompany.webapp.dto.Pager" alias="pager"/>
-		<typeAlias type="com.mycompany.webapp.dto.Member" alias="member"/>
-	</typeAliases>	
+		<typeAlias type="com.mycompany.webapp.dto.Product"
+			alias="product" />
+		<typeAlias type="com.mycompany.webapp.dto.Pager"
+			alias="pager" />
+		<typeAlias type="com.mycompany.webapp.dto.Category"
+			alias="category" />
+		<typeAlias type="com.mycompany.webapp.dto.Member"
+			alias="member" />
+		<typeAlias type="com.mycompany.webapp.dto.Color"
+			alias="color" />
+		<typeAlias type="com.mycompany.webapp.dto.Stock"
+			alias="stock" />
+	</typeAliases>
 </configuration>
 
 
