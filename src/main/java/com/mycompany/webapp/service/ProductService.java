@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.ProductDao;
 import com.mycompany.webapp.dto.Category;
+import com.mycompany.webapp.dto.CategoryLarge;
+import com.mycompany.webapp.dto.CategoryMedium;
 import com.mycompany.webapp.dto.Color;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Product;
@@ -74,5 +76,25 @@ public class ProductService {
 
 	public List<Color> getProductColors(String pid) {
 		return productDao.selectProductColors(pid);
+	}
+	
+	public CategoryLarge getCategory(String clarge) {
+		CategoryLarge categoryLarge = new CategoryLarge();
+		categoryLarge.setClarge(clarge);
+		
+		List<CategoryMedium> list =productDao.selectCategoryLarge(clarge);
+		
+		HashMap<String, Object> clargeCmedium = new HashMap<>();
+		clargeCmedium.put("clarge", clarge);
+		
+		for(CategoryMedium c : list) {
+			clargeCmedium.put("cmedium", c.getCmedium());
+			List<String> csmall = productDao.selectCategoryMedium(clargeCmedium);
+			c.setCsmall(csmall);
+		}
+		
+		categoryLarge.setCmedium(list);
+		
+		return categoryLarge;
 	}
 }

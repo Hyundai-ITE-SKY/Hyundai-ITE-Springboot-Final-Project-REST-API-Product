@@ -15,6 +15,9 @@
 			alias="color" />
 		<typeAlias type="com.mycompany.webapp.dto.Stock"
 			alias="stock" />
+		<typeAlias type="com.mycompany.webapp.dto.CategoryMedium"
+			alias="categorymedium" />
+		
 	</typeAliases>
 </configuration>
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mycompany.webapp.dto.Category;
+import com.mycompany.webapp.dto.CategoryLarge;
 import com.mycompany.webapp.dto.Color;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Product;
@@ -119,5 +120,12 @@ public class ProductController {
 		product.setColors(productService.getProductColors(pid));
 
 		return product;
+	}
+	
+	@GetMapping("/category/{clarge}")
+	public CategoryLarge getCategory(@PathVariable String clarge) {
+		log.info("실행");
+		CategoryLarge categoryLarge = productService.getCategory(clarge);
+		return categoryLarge;
 	}
 }
