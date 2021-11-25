@@ -101,12 +101,21 @@ public class ProductController {
 		return productService.selectStock(pid, colorcode);
 	}
 
-	@GetMapping("/product/{pno}")
-	public Product getProduct(@PathVariable int pno) {
+//	@GetMapping("/product/{pno}")
+//	public Product getProduct(@PathVariable int pno) {
+//		log.info("실행");
+//		Product product = productService.selectWithPno(pno);
+//
+//		String pid = product.getPid();
+//		product.setColors(productService.getProductColors(pid));
+//
+//		return product;
+//	}
+	
+	@GetMapping("/product/{pid}")
+	public Product getProduct(@PathVariable String pid) {
 		log.info("실행");
-		Product product = productService.selectWithPno(pno);
-
-		String pid = product.getPid();
+		Product product = productService.selectWithPid(pid);
 		product.setColors(productService.getProductColors(pid));
 
 		return product;

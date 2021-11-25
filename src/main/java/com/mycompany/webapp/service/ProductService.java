@@ -46,6 +46,11 @@ public class ProductService {
 		log.info("실행");
 		return productDao.selectProductWithPno(pno);
 	}
+	
+	public Product selectWithPid(String pid) {
+		log.info("실행");
+		return productDao.selectProductWithPid(pid);
+	}
 
 	public int getTotalProductNum(Category category) {
 		if (category.getCmedium() != null) {

@@ -84,6 +84,19 @@
 		#{pno}
 		AND b.bno = p.bno
 	</select>
+	<select id="selectProductWithPid" parameterType="String"
+		resultType="product">
+		SELECT p.pid as pid, b.bname as bname, p.clarge as clarge,
+		p.cmedium as cmedium, p.csmall as csmall,
+		p.pno as pno, p.pname as
+		pname,
+		p.pprice as pprice, p.pdetail as pdetail, p.pseason as pseason,
+		p.ptotalamount as ptotalamount
+		FROM product p, brand b
+		WHERE pid =
+		#{pid}
+		AND b.bno = p.bno
+	</select>
 	<select id="countProductsWithLarge" parameterType="category"
 		resultType="int">
 		SELECT

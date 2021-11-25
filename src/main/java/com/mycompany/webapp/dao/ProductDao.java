@@ -20,5 +20,6 @@ public interface ProductDao {
 	public int countProductsWithSmall(Category category);
 	public List<Color> selectProductColors(String pid);
 	public Product selectProductWithPno(int pno);
+	public Product selectProductWithPid(String pid);
 	public Stock selectProductStock(HashMap<String, Object> pidColorcode);
 }
