@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,8 +25,8 @@ public class ProductController {
 	@Resource
 	ProductService productService;
 
-	@GetMapping("/productlist/{clarge}/{pageNo}")
-	public List<Product> getProductList(@PathVariable String clarge, @PathVariable int pageNo) {
+	@GetMapping(value = "/productlist/{clarge}/{pageNo}", produces = "application/json; charset=UTF-8")
+	public String getProductList(@PathVariable String clarge, @PathVariable int pageNo) {
 		log.info("실행: 대분류");
 
 		Category category = new Category();
@@ -41,12 +42,15 @@ public class ProductController {
 			product.setColors(productService.getProductColors(pid));
 		}
 
-		return list;
+		JSONObject json = new JSONObject();
+		json.put("productlist", list);
+		json.put("totalPages", pager.getTotalPageNo());
+
+		return json.toString();
 	}
 
-	@GetMapping("/productlist/{clarge}/{cmedium}/{pageNo}")
-	public List<Product> getProductList(@PathVariable String clarge, @PathVariable String cmedium,
-			@PathVariable int pageNo) {
+	@GetMapping(value = "/productlist/{clarge}/{cmedium}/{pageNo}", produces = "application/json; charset=UTF-8")
+	public String getProductList(@PathVariable String clarge, @PathVariable String cmedium, @PathVariable int pageNo) {
 		log.info("실행: 중분류");
 
 		Category category = new Category();
@@ -63,12 +67,16 @@ public class ProductController {
 			product.setColors(productService.getProductColors(pid));
 		}
 
-		return list;
+		JSONObject json = new JSONObject();
+		json.put("productlist", list);
+		json.put("totalPages", pager.getTotalPageNo());
+
+		return json.toString();
 	}
 
-	@GetMapping("/productlist/{clarge}/{cmedium}/{csmall}/{pageNo}")
-	public List<Product> getProductList(@PathVariable String clarge, @PathVariable String cmedium,
-			@PathVariable String csmall, @PathVariable int pageNo) {
+	@GetMapping(value = "/productlist/{clarge}/{cmedium}/{csmall}/{pageNo}", produces = "application/json; charset=UTF-8")
+	public String getProductList(@PathVariable String clarge, @PathVariable String cmedium, @PathVariable String csmall,
+			@PathVariable int pageNo) {
 		log.info("실행: 소분류");
 
 		Category category = new Category();
@@ -87,7 +95,11 @@ public class ProductController {
 			product.setColors(productService.getProductColors(pid));
 		}
 
-		return list;
+		JSONObject json = new JSONObject();
+		json.put("productlist", list);
+		json.put("totalPages", pager.getTotalPageNo());
+
+		return json.toString();
 	}
 
 	@GetMapping("/product/colorlist/{pid}")
@@ -112,7 +124,7 @@ public class ProductController {
 //
 //		return product;
 //	}
-	
+
 	@GetMapping("/product/{pid}")
 	public Product getProduct(@PathVariable String pid) {
 		log.info("실행");
@@ -121,7 +133,7 @@ public class ProductController {
 
 		return product;
 	}
-	
+
 	@GetMapping("/category/{clarge}")
 	public CategoryLarge getCategory(@PathVariable String clarge) {
 		log.info("실행");
