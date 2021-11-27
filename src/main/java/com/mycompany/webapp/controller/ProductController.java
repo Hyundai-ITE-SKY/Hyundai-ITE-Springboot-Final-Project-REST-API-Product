@@ -14,6 +14,7 @@ import com.mycompany.webapp.dto.CategoryLarge;
 import com.mycompany.webapp.dto.Color;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Product;
+import com.mycompany.webapp.dto.ProductInfo;
 import com.mycompany.webapp.dto.Stock;
 import com.mycompany.webapp.service.ProductService;
 
@@ -124,7 +125,6 @@ public class ProductController {
 //
 //		return product;
 //	}
-
 	@GetMapping("/product/{pid}")
 	public Product getProduct(@PathVariable String pid) {
 		log.info("실행");
@@ -139,5 +139,12 @@ public class ProductController {
 		log.info("실행");
 		CategoryLarge categoryLarge = productService.getCategory(clarge);
 		return categoryLarge;
+	}
+	
+	@GetMapping("/product/info/{pid}/{colorcode}")
+	public ProductInfo getProductInfo(@PathVariable String pid, @PathVariable String colorcode) {
+		log.info("실행");
+		ProductInfo pinfo = productService.getProductInfo(pid, colorcode);
+		return pinfo;
 	}
 }

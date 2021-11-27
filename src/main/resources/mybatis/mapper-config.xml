@@ -17,6 +17,8 @@
 			alias="stock" />
 		<typeAlias type="com.mycompany.webapp.dto.CategoryMedium"
 			alias="categorymedium" />
+		<typeAlias type="com.mycompany.webapp.dto.ProductInfo"
+			alias="pinfo" />
 		
 	</typeAliases>
 </configuration>

@@ -14,6 +14,7 @@ import com.mycompany.webapp.dto.CategoryMedium;
 import com.mycompany.webapp.dto.Color;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Product;
+import com.mycompany.webapp.dto.ProductInfo;
 import com.mycompany.webapp.dto.Stock;
 
 import lombok.extern.slf4j.Slf4j;
@@ -96,5 +97,9 @@ public class ProductService {
 		categoryLarge.setCmedium(list);
 		
 		return categoryLarge;
+	}
+
+	public ProductInfo getProductInfo(String pid, String colorcode) {
+		return productDao.selectProuctInfo(pid,colorcode);
 	}
 }

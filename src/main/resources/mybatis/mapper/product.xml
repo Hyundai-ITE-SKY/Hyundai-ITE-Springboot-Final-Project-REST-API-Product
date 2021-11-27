@@ -130,7 +130,8 @@
 	<select id="selectProductColors" parameterType="String"
 		resultType="color">
 		SELECT
-		pid, ccolorcode, cimage1, cimage2, cimage3, ccolorimage, cmatchpid
+		pid, ccolorcode, cimage1, cimage2, cimage3,
+		ccolorimage, cmatchpid
 		FROM color
 		WHERE pid = #{pid}
 	</select>
@@ -139,20 +140,31 @@
 		SELECT
 		pid, ccolorcode, ssize, samount
 		FROM stock
-		WHERE pid = #{pid}
+		WHERE pid =
+		#{pid}
 		AND ccolorcode = #{colorcode}
 	</select>
-	<select id="selectCategoryLarge" parameterType="string" resultType="categorymedium">
+	<select id="selectCategoryLarge" parameterType="string"
+		resultType="categorymedium">
 		select distinct cmedium
 		from category
 		where clarge=#{clarge}
 		order by cmedium
 	</select>
-	<select id="selectCategoryMedium" parameterType="HashMap" resultType="string">
+	<select id="selectCategoryMedium" parameterType="HashMap"
+		resultType="string">
 		select distinct csmall
 		from category
-		where clarge=#{clarge} and cmedium=#{cmedium}
+		where clarge=#{clarge}
+		and cmedium=#{cmedium}
 		order by csmall
+	</select>
+	<select id="selectProuctInfo" parameterType="string"
+		resultType="pinfo">
+		select p.pid,p.pname, p.pprice, c.cimage1, b.bname
+		from product p, color c, brand b
+		where p.pid = c.pid and p.bno=b.bno
+		and p.pid=#{pid} and c.ccolorcode=#{colorcode}
 	</select>
 </mapper>
 
