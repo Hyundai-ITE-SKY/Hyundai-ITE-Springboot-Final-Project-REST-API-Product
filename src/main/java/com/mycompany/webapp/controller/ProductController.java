@@ -110,7 +110,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/product/stock/{pid}/{colorcode}")
-	public Stock getProductStock(@PathVariable String pid, @PathVariable String colorcode) {
+	public List<Stock> getProductStock(@PathVariable String pid, @PathVariable String colorcode) {
 		log.info("실행");
 		return productService.selectStock(pid, colorcode);
 	}

@@ -65,7 +65,7 @@ public class ProductService {
 		return productDao.countProductsWithLarge(category);
 	}
 
-	public Stock selectStock(String pid, String colorcode) {
+	public List<Stock> selectStock(String pid, String colorcode) {
 		log.info("실행");
 
 		HashMap<String, Object> pidColorcode = new HashMap<String, Object>();

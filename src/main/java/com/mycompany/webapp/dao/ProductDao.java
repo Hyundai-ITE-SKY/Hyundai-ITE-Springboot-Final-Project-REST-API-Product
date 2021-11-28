@@ -24,7 +24,7 @@ public interface ProductDao {
 	public List<Color> selectProductColors(String pid);
 	public Product selectProductWithPno(int pno);
 	public Product selectProductWithPid(String pid);
-	public Stock selectProductStock(HashMap<String, Object> pidColorcode);
+	public List<Stock> selectProductStock(HashMap<String, Object> pidColorcode);
 	public List<CategoryMedium> selectCategoryLarge(String clarge);
 	public List<String> selectCategoryMedium(HashMap<String, Object> clargeCmedium);
 	public ProductInfo selectProuctInfo(@Param("pid")String pid, @Param("colorcode")String colorcode);
