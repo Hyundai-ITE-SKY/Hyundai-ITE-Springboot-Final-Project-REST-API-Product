@@ -44,6 +44,28 @@ public class ProductService {
 		log.info("대분류");
 		return productDao.selectProductsWithLarge(categoryPager);
 	}
+	
+	public List<Product> selectBestWithCategory(Category category) {
+		log.info("실행");
+
+		if (category.getCmedium() != null) {
+			log.info("중분류");
+			return productDao.selectBestProductsWithMedium(category);
+		}
+		log.info("대분류");
+		return productDao.selectBestProductsWithLarge(category);
+	}
+	
+	public List<Product> selectNewWithCategory(Category category) {
+		log.info("실행");
+
+		if (category.getCmedium() != null) {
+			log.info("중분류");
+			return productDao.selectNewProductsWithMedium(category);
+		}
+		log.info("대분류");
+		return productDao.selectNewProductsWithLarge(category);
+	}
 
 	public Product selectWithPno(int pno) {
 		log.info("실행");

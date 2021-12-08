@@ -19,6 +19,7 @@
 					AND p.cmedium LIKE '%'
 					AND p.csmall LIKE '%'
 		            AND b.bno = p.bno
+			    	ORDER BY p.pno DESC
 		        )
 		        WHERE ROWNUM <= #{pager.endRowNo}
 		)
@@ -42,6 +43,7 @@
 					AND p.cmedium = #{category.cmedium}
 					AND p.csmall LIKE '%'
 		            AND b.bno = p.bno
+			    	ORDER BY p.pno DESC
 		        )
 		        WHERE ROWNUM <= #{pager.endRowNo}
 		)
@@ -65,10 +67,81 @@
 					AND p.cmedium = #{category.cmedium}
 					AND p.csmall = #{category.csmall}
 		            AND b.bno = p.bno
+			    	ORDER BY p.pno DESC
 		        )
 		        WHERE ROWNUM <= #{pager.endRowNo}
 		)
 		WHERE rnum >= #{pager.startRowNo}
+		]]>
+	</select>
+	<select id="selectBestProductsWithLarge"
+		parameterType="category" resultType="product">
+		<![CDATA[
+			SELECT pid, bname, clarge, cmedium, csmall,
+			pno, pname, pprice, pdetail, pseason, ptotalamount
+	        FROM (
+	            SELECT p.pid as pid, b.bname as bname, p.clarge as clarge, p.cmedium as cmedium, p.csmall as csmall,
+					   p.pno as pno, p.pname as pname, p.pprice as pprice, p.pdetail as pdetail, p.pseason as pseason,
+					   p.ptotalamount as ptotalamount
+	            FROM product p, brand b
+	            WHERE p.clarge = #{clarge}
+	            AND b.bno = p.bno
+		    	ORDER BY p.ptotalamount DESC
+	        )
+	        WHERE ROWNUM <= 5
+		]]>
+	</select>
+	<select id="selectBestProductsWithMedium"
+		parameterType="category" resultType="product">
+		<![CDATA[
+			SELECT pid, bname, clarge, cmedium, csmall,
+			pno, pname, pprice, pdetail, pseason, ptotalamount
+	        FROM (
+	            SELECT p.pid as pid, b.bname as bname, p.clarge as clarge, p.cmedium as cmedium, p.csmall as csmall,
+					   p.pno as pno, p.pname as pname, p.pprice as pprice, p.pdetail as pdetail, p.pseason as pseason,
+					   p.ptotalamount as ptotalamount
+	            FROM product p, brand b
+	            WHERE p.clarge = #{clarge}
+	            AND p.cmedium = #{cmedium}
+	            AND b.bno = p.bno
+		    	ORDER BY p.ptotalamount DESC
+	        )
+	        WHERE ROWNUM <= 5
+		]]>
+	</select>
+	<select id="selectNewProductsWithLarge"
+		parameterType="category" resultType="product">
+		<![CDATA[
+			SELECT pid, bname, clarge, cmedium, csmall,
+			pno, pname, pprice, pdetail, pseason, ptotalamount
+	        FROM (
+	            SELECT p.pid as pid, b.bname as bname, p.clarge as clarge, p.cmedium as cmedium, p.csmall as csmall,
+					   p.pno as pno, p.pname as pname, p.pprice as pprice, p.pdetail as pdetail, p.pseason as pseason,
+					   p.ptotalamount as ptotalamount
+	            FROM product p, brand b
+	            WHERE p.clarge = #{clarge}
+	            AND b.bno = p.bno
+		    	ORDER BY p.pno DESC
+	        )
+	        WHERE ROWNUM <= 5
+		]]>
+	</select>
+	<select id="selectNewProductsWithMedium"
+		parameterType="category" resultType="product">
+		<![CDATA[
+			SELECT pid, bname, clarge, cmedium, csmall,
+			pno, pname, pprice, pdetail, pseason, ptotalamount
+	        FROM (
+	            SELECT p.pid as pid, b.bname as bname, p.clarge as clarge, p.cmedium as cmedium, p.csmall as csmall,
+					   p.pno as pno, p.pname as pname, p.pprice as pprice, p.pdetail as pdetail, p.pseason as pseason,
+					   p.ptotalamount as ptotalamount
+	            FROM product p, brand b
+	            WHERE p.clarge = #{clarge}
+	            AND p.cmedium = #{cmedium}
+	            AND b.bno = p.bno
+		    	ORDER BY p.pno DESC
+	        )
+	        WHERE ROWNUM <= 5
 		]]>
 	</select>
 	<select id="selectProductWithPno" parameterType="int"
@@ -162,9 +235,11 @@
 	<select id="selectProuctInfo" parameterType="string"
 		resultType="pinfo">
 		select p.pid,p.pname, p.pprice, c.cimage1, b.bname
-		from product p, color c, brand b
+		from
+		product p, color c, brand b
 		where p.pid = c.pid and p.bno=b.bno
-		and p.pid=#{pid} and c.ccolorcode=#{colorcode}
+		and
+		p.pid=#{pid} and c.ccolorcode=#{colorcode}
 	</select>
 </mapper>
 

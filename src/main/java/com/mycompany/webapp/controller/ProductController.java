@@ -125,11 +125,17 @@ public class ProductController {
 //
 //		return product;
 //	}
+
 	@GetMapping("/product/{pid}")
 	public Product getProduct(@PathVariable String pid) {
 		log.info("실행");
 		Product product = productService.selectWithPid(pid);
 		product.setColors(productService.getProductColors(pid));
+
+		for (Color color : product.getColors()) {
+			List<Stock> stocks = productService.selectStock(pid, color.getCcolorcode());
+			color.setStocks(stocks);
+		}
 
 		return product;
 	}
@@ -140,11 +146,97 @@ public class ProductController {
 		CategoryLarge categoryLarge = productService.getCategory(clarge);
 		return categoryLarge;
 	}
-	
+
 	@GetMapping("/product/info/{pid}/{colorcode}")
 	public ProductInfo getProductInfo(@PathVariable String pid, @PathVariable String colorcode) {
 		log.info("실행");
 		ProductInfo pinfo = productService.getProductInfo(pid, colorcode);
 		return pinfo;
+	}
+
+	@GetMapping("/productlist/best/{clarge}")
+	public List<Product> getBestWithLarge(@PathVariable String clarge) {
+		log.info("실행");
+
+		Category category = new Category();
+		category.setClarge(clarge);
+
+		List<Product> products = productService.selectBestWithCategory(category);
+
+		for (Product product : products) {
+			product.setColors(productService.getProductColors(product.getPid()));
+
+			for (Color color : product.getColors()) {
+				List<Stock> stocks = productService.selectStock(product.getPid(), color.getCcolorcode());
+				color.setStocks(stocks);
+			}
+		}
+
+		return products;
+	}
+
+	@GetMapping("/productlist/best/{clarge}/{cmedium}")
+	public List<Product> getBestWithLarge(@PathVariable String clarge, @PathVariable String cmedium) {
+		log.info("실행");
+
+		Category category = new Category();
+		category.setClarge(clarge);
+		category.setCmedium(cmedium);
+
+		List<Product> products = productService.selectBestWithCategory(category);
+
+		for (Product product : products) {
+			product.setColors(productService.getProductColors(product.getPid()));
+
+			for (Color color : product.getColors()) {
+				List<Stock> stocks = productService.selectStock(product.getPid(), color.getCcolorcode());
+				color.setStocks(stocks);
+			}
+		}
+
+		return products;
+	}
+	
+	@GetMapping("/productlist/new/{clarge}")
+	public List<Product> getNewWithLarge(@PathVariable String clarge) {
+		log.info("실행");
+
+		Category category = new Category();
+		category.setClarge(clarge);
+
+		List<Product> products = productService.selectNewWithCategory(category);
+
+		for (Product product : products) {
+			product.setColors(productService.getProductColors(product.getPid()));
+
+			for (Color color : product.getColors()) {
+				List<Stock> stocks = productService.selectStock(product.getPid(), color.getCcolorcode());
+				color.setStocks(stocks);
+			}
+		}
+
+		return products;
+	}
+
+	@GetMapping("/productlist/new/{clarge}/{cmedium}")
+	public List<Product> getNewWithLarge(@PathVariable String clarge, @PathVariable String cmedium) {
+		log.info("실행");
+
+		Category category = new Category();
+		category.setClarge(clarge);
+		category.setCmedium(cmedium);
+
+		List<Product> products = productService.selectNewWithCategory(category);
+
+		for (Product product : products) {
+			product.setColors(productService.getProductColors(product.getPid()));
+
+			for (Color color : product.getColors()) {
+				List<Stock> stocks = productService.selectStock(product.getPid(), color.getCcolorcode());
+				color.setStocks(stocks);
+			}
+		}
+
+		return products;
 	}
 }

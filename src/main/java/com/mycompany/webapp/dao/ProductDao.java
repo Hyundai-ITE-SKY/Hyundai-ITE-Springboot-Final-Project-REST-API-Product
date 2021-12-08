@@ -18,6 +18,10 @@ public interface ProductDao {
 	public List<Product> selectProductsWithLarge(HashMap<String, Object> categoryPager);
 	public List<Product> selectProductsWithMedium(HashMap<String, Object> categoryPager);
 	public List<Product> selectProductsWithSmall(HashMap<String, Object> categoryPager);
+	public List<Product> selectBestProductsWithLarge(Category category);
+	public List<Product> selectBestProductsWithMedium(Category category);
+	public List<Product> selectNewProductsWithLarge(Category category);
+	public List<Product> selectNewProductsWithMedium(Category category);
 	public int countProductsWithLarge(Category category);
 	public int countProductsWithMedium(Category category);
 	public int countProductsWithSmall(Category category);

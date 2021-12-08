@@ -1,5 +1,7 @@
 package com.mycompany.webapp.dto;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -11,4 +13,5 @@ public class Color {
 	private String cimage3;
 	private String ccolorimage;
 	private String cmatchpid;
+	private List<Stock> stocks;
 }
