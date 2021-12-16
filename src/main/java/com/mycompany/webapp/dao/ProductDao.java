@@ -22,4 +22,6 @@ public interface ProductDao {
 	public Product selectProductWithPno(int pno);
 	public Product selectProductWithPid(String pid);
 	public Stock selectProductStock(HashMap<String, Object> pidColorcode);
+	public int updateStock(Stock stock);
+	public int updateProductTotalAmount(Stock stock);
 }

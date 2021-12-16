@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mycompany.webapp.dto.Category;
@@ -85,7 +87,7 @@ public class ProductController {
 			String pid = product.getPid();
 			product.setColors(productService.getProductColors(pid));
 		}
-
+		
 		return list;
 	}
 
@@ -120,4 +122,14 @@ public class ProductController {
 
 		return product;
 	}
+	
+	@PostMapping("/product/updatestock")
+	public int updateStock(Stock stock) {
+		log.info("실행");
+		productService.updateStock(stock);
+		productService.updateProductTotalAmount(stock);
+		return 1;
+	}
+	
+	
 }

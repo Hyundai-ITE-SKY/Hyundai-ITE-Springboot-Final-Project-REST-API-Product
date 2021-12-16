@@ -75,4 +75,11 @@ public class ProductService {
 	public List<Color> getProductColors(String pid) {
 		return productDao.selectProductColors(pid);
 	}
+	
+	public int updateStock(Stock stock) {
+		return productDao.updateStock(stock);
+	}
+	public int updateProductTotalAmount(Stock stock) {
+		return productDao.updateProductTotalAmount(stock);
+	}
 }
