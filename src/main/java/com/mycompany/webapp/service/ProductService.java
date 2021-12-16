@@ -101,13 +101,14 @@ public class ProductService {
 		return productDao.selectProductColors(pid);
 	}
 	
-<<<<<<< HEAD
 	public int updateStock(Stock stock) {
 		return productDao.updateStock(stock);
 	}
+	
 	public int updateProductTotalAmount(Stock stock) {
 		return productDao.updateProductTotalAmount(stock);
-=======
+	}
+	
 	public CategoryLarge getCategory(String clarge) {
 		CategoryLarge categoryLarge = new CategoryLarge();
 		categoryLarge.setClarge(clarge);
@@ -130,6 +131,5 @@ public class ProductService {
 
 	public ProductInfo getProductInfo(String pid, String colorcode) {
 		return productDao.selectProuctInfo(pid,colorcode);
->>>>>>> 1bf5878b869f9ac3f67dad19366f7280d2ee452b
 	}
 }

@@ -3,32 +3,14 @@
 
 <configuration>
 	<typeAliases>
-<<<<<<< HEAD
 		<typeAlias type="com.mycompany.webapp.dto.Product" alias="product" />
 		<typeAlias type="com.mycompany.webapp.dto.Pager" alias="pager" />
 		<typeAlias type="com.mycompany.webapp.dto.Category" alias="category" />
 		<typeAlias type="com.mycompany.webapp.dto.Member" alias="member" />
 		<typeAlias type="com.mycompany.webapp.dto.Color" alias="color" />
 		<typeAlias type="com.mycompany.webapp.dto.Stock" alias="stock" />
-=======
-		<typeAlias type="com.mycompany.webapp.dto.Product"
-			alias="product" />
-		<typeAlias type="com.mycompany.webapp.dto.Pager"
-			alias="pager" />
-		<typeAlias type="com.mycompany.webapp.dto.Category"
-			alias="category" />
-		<typeAlias type="com.mycompany.webapp.dto.Member"
-			alias="member" />
-		<typeAlias type="com.mycompany.webapp.dto.Color"
-			alias="color" />
-		<typeAlias type="com.mycompany.webapp.dto.Stock"
-			alias="stock" />
-		<typeAlias type="com.mycompany.webapp.dto.CategoryMedium"
-			alias="categorymedium" />
-		<typeAlias type="com.mycompany.webapp.dto.ProductInfo"
-			alias="pinfo" />
-		
->>>>>>> 1bf5878b869f9ac3f67dad19366f7280d2ee452b
+		<typeAlias type="com.mycompany.webapp.dto.CategoryMedium" alias="categorymedium" />
+		<typeAlias type="com.mycompany.webapp.dto.ProductInfo" alias="pinfo" />
 	</typeAliases>
 </configuration>
 

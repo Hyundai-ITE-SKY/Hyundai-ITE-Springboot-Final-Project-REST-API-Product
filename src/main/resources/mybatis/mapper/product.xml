@@ -71,9 +71,7 @@
 		WHERE rnum >= #{pager.startRowNo}
 		]]>
 	</select>
-<<<<<<< HEAD
-	<select id="selectProductWithPno" parameterType="int" resultType="product">
-=======
+
 	<select id="selectBestProductsWithLarge"
 		parameterType="category" resultType="product">
 		<![CDATA[
@@ -146,7 +144,6 @@
 	</select>
 	<select id="selectProductWithPno" parameterType="int"
 		resultType="product">
->>>>>>> 1bf5878b869f9ac3f67dad19366f7280d2ee452b
 		SELECT p.pid as pid, b.bname as bname, p.clarge as clarge,
 		p.cmedium as cmedium, p.csmall as csmall,
 		p.pno as pno, p.pname as
@@ -213,7 +210,6 @@
 		#{pid}
 		AND ccolorcode = #{colorcode}
 	</select>
-<<<<<<< HEAD
 	
 	<update id="updateStock" parameterType="stock">
 		UPDATE stock
@@ -226,7 +222,6 @@
 		SET ptotalamount= ptotalamount + #{samount}
 		WHERE pid = #{pid}
 	</update>
-=======
 	<select id="selectCategoryLarge" parameterType="string"
 		resultType="categorymedium">
 		select distinct cmedium
@@ -251,7 +246,6 @@
 		and
 		p.pid=#{pid} and c.ccolorcode=#{colorcode}
 	</select>
->>>>>>> 1bf5878b869f9ac3f67dad19366f7280d2ee452b
 </mapper>
 
 

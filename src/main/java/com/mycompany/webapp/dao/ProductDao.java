@@ -28,14 +28,11 @@ public interface ProductDao {
 	public List<Color> selectProductColors(String pid);
 	public Product selectProductWithPno(int pno);
 	public Product selectProductWithPid(String pid);
-<<<<<<< HEAD
-	public Stock selectProductStock(HashMap<String, Object> pidColorcode);
+//	public Stock selectProductStock(HashMap<String, Object> pidColorcode);
 	public int updateStock(Stock stock);
 	public int updateProductTotalAmount(Stock stock);
-=======
 	public List<Stock> selectProductStock(HashMap<String, Object> pidColorcode);
 	public List<CategoryMedium> selectCategoryLarge(String clarge);
 	public List<String> selectCategoryMedium(HashMap<String, Object> clargeCmedium);
 	public ProductInfo selectProuctInfo(@Param("pid")String pid, @Param("colorcode")String colorcode);
->>>>>>> 1bf5878b869f9ac3f67dad19366f7280d2ee452b
 }

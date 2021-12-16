@@ -97,17 +97,12 @@ public class ProductController {
 			String pid = product.getPid();
 			product.setColors(productService.getProductColors(pid));
 		}
-<<<<<<< HEAD
-		
-		return list;
-=======
 
 		JSONObject json = new JSONObject();
 		json.put("productlist", list);
 		json.put("totalPages", pager.getTotalPageNo());
 
 		return json.toString();
->>>>>>> 1bf5878b869f9ac3f67dad19366f7280d2ee452b
 	}
 
 	@GetMapping("/product/colorlist/{pid}")
@@ -146,7 +141,6 @@ public class ProductController {
 
 		return product;
 	}
-<<<<<<< HEAD
 	
 	@PostMapping("/product/updatestock")
 	public int updateStock(Stock stock) {
@@ -156,8 +150,6 @@ public class ProductController {
 		return 1;
 	}
 	
-	
-=======
 
 	@GetMapping("/category/{clarge}")
 	public CategoryLarge getCategory(@PathVariable String clarge) {
@@ -258,5 +250,4 @@ public class ProductController {
 
 		return products;
 	}
->>>>>>> 1bf5878b869f9ac3f67dad19366f7280d2ee452b
 }
