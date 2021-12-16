@@ -8,4 +8,5 @@ import lombok.Data;
 public class CategoryLarge {
 	private String clarge;
 	private List<CategoryMedium> cmedium;
+	
 }

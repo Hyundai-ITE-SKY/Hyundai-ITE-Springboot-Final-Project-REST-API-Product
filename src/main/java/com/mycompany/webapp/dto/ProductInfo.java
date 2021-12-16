@@ -9,4 +9,5 @@ public class ProductInfo {
 	private String pname;
 	private String cimage1;
 	private String bname;
+	
 }
