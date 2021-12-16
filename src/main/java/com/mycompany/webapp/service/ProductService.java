@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.ProductDao;
 import com.mycompany.webapp.dto.Category;
+import com.mycompany.webapp.dto.CategoryLarge;
+import com.mycompany.webapp.dto.CategoryMedium;
 import com.mycompany.webapp.dto.Color;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Product;
+import com.mycompany.webapp.dto.ProductInfo;
 import com.mycompany.webapp.dto.Stock;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +44,28 @@ public class ProductService {
 		log.info("대분류");
 		return productDao.selectProductsWithLarge(categoryPager);
 	}
+	
+	public List<Product> selectBestWithCategory(Category category) {
+		log.info("실행");
+
+		if (category.getCmedium() != null) {
+			log.info("중분류");
+			return productDao.selectBestProductsWithMedium(category);
+		}
+		log.info("대분류");
+		return productDao.selectBestProductsWithLarge(category);
+	}
+	
+	public List<Product> selectNewWithCategory(Category category) {
+		log.info("실행");
+
+		if (category.getCmedium() != null) {
+			log.info("중분류");
+			return productDao.selectNewProductsWithMedium(category);
+		}
+		log.info("대분류");
+		return productDao.selectNewProductsWithLarge(category);
+	}
 
 	public Product selectWithPno(int pno) {
 		log.info("실행");
@@ -62,7 +87,7 @@ public class ProductService {
 		return productDao.countProductsWithLarge(category);
 	}
 
-	public Stock selectStock(String pid, String colorcode) {
+	public List<Stock> selectStock(String pid, String colorcode) {
 		log.info("실행");
 
 		HashMap<String, Object> pidColorcode = new HashMap<String, Object>();
@@ -76,10 +101,35 @@ public class ProductService {
 		return productDao.selectProductColors(pid);
 	}
 	
+<<<<<<< HEAD
 	public int updateStock(Stock stock) {
 		return productDao.updateStock(stock);
 	}
 	public int updateProductTotalAmount(Stock stock) {
 		return productDao.updateProductTotalAmount(stock);
+=======
+	public CategoryLarge getCategory(String clarge) {
+		CategoryLarge categoryLarge = new CategoryLarge();
+		categoryLarge.setClarge(clarge);
+		
+		List<CategoryMedium> list =productDao.selectCategoryLarge(clarge);
+		
+		HashMap<String, Object> clargeCmedium = new HashMap<>();
+		clargeCmedium.put("clarge", clarge);
+		
+		for(CategoryMedium c : list) {
+			clargeCmedium.put("cmedium", c.getCmedium());
+			List<String> csmall = productDao.selectCategoryMedium(clargeCmedium);
+			c.setCsmall(csmall);
+		}
+		
+		categoryLarge.setCmedium(list);
+		
+		return categoryLarge;
+	}
+
+	public ProductInfo getProductInfo(String pid, String colorcode) {
+		return productDao.selectProuctInfo(pid,colorcode);
+>>>>>>> 1bf5878b869f9ac3f67dad19366f7280d2ee452b
 	}
 }
