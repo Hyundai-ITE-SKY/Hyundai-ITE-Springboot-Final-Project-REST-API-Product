@@ -145,9 +145,14 @@ public class ProductController {
 	@PostMapping("/product/updatestock")
 	public int updateStock(Stock stock) {
 		log.info("실행");
-		productService.updateStock(stock);
-		productService.updateProductTotalAmount(stock);
-		return 1;
+		Stock checkStock = productService.selectStock(stock.getPid(), stock.getCcolorcode(), stock.getSsize());
+		log.info("checkStock"+checkStock);
+		// 상품의 재고가 음수일 경우, 수량 구매시 상품 재고가 음수일 경우 return 0
+		if(checkStock.getSamount()<0 || checkStock.getSamount() - stock.getSamount()<0) {
+			return 0;
+		}
+		
+		return productService.updateStockPTotalAmount(stock);
 	}
 	
 

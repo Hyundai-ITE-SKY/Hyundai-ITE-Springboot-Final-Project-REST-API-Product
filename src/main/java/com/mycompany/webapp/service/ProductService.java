@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mycompany.webapp.dao.ProductDao;
 import com.mycompany.webapp.dto.Category;
@@ -100,13 +101,13 @@ public class ProductService {
 	public List<Color> getProductColors(String pid) {
 		return productDao.selectProductColors(pid);
 	}
-	
-	public int updateStock(Stock stock) {
-		return productDao.updateStock(stock);
-	}
-	
-	public int updateProductTotalAmount(Stock stock) {
-		return productDao.updateProductTotalAmount(stock);
+		
+	@Transactional
+	public int updateStockPTotalAmount(Stock stock) {
+		productDao.updateStock(stock);
+		productDao.updateProductTotalAmount(stock);
+		
+		return 1;
 	}
 	
 	public CategoryLarge getCategory(String clarge) {
@@ -131,5 +132,8 @@ public class ProductService {
 
 	public ProductInfo getProductInfo(String pid, String colorcode) {
 		return productDao.selectProuctInfo(pid,colorcode);
+	}
+	public Stock selectStock(String pid, String colorcode, String ssize) {
+		return productDao.selectStockWithPidColorSize(pid, colorcode, ssize);
 	}
 }

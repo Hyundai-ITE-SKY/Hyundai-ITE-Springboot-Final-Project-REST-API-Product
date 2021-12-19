@@ -35,4 +35,5 @@ public interface ProductDao {
 	public List<CategoryMedium> selectCategoryLarge(String clarge);
 	public List<String> selectCategoryMedium(HashMap<String, Object> clargeCmedium);
 	public ProductInfo selectProuctInfo(@Param("pid")String pid, @Param("colorcode")String colorcode);
+	public Stock selectStockWithPidColorSize(@Param("pid")String pid, @Param("colorcode")String colorcode, @Param("size")String ssize);
 }

@@ -213,7 +213,7 @@
 	
 	<update id="updateStock" parameterType="stock">
 		UPDATE stock
-		SET samount= samount - #{samount}
+		SET samount= samount - #{samount}, stotalamount = stotalamount + #{samount}
 		WHERE pid=#{pid} and ccolorcode=#{ccolorcode} and ssize=#{ssize}
 	</update>
 	
@@ -245,6 +245,14 @@
 		where p.pid = c.pid and p.bno=b.bno
 		and
 		p.pid=#{pid} and c.ccolorcode=#{colorcode}
+	</select>
+	
+	<select id="selectStockWithPidColorSize" parameterType="string"  resultType="stock">
+		SELECT pid, ccolorcode, ssize, samount
+		FROM stock
+		WHERE pid = #{pid}
+		AND ccolorcode = #{colorcode}
+		AND ssize = #{size}
 	</select>
 </mapper>
 
