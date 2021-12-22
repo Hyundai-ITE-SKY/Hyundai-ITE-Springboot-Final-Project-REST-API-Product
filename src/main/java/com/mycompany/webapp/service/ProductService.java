@@ -13,6 +13,7 @@ import com.mycompany.webapp.dto.Category;
 import com.mycompany.webapp.dto.CategoryLarge;
 import com.mycompany.webapp.dto.CategoryMedium;
 import com.mycompany.webapp.dto.Color;
+import com.mycompany.webapp.dto.Exhibition;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Product;
 import com.mycompany.webapp.dto.ProductInfo;
@@ -135,5 +136,8 @@ public class ProductService {
 	}
 	public Stock selectStock(String pid, String colorcode, String ssize) {
 		return productDao.selectStockWithPidColorSize(pid, colorcode, ssize);
+	}
+	public List<Exhibition> getExhibition() {
+		return productDao.getExhibition();
 	}
 }

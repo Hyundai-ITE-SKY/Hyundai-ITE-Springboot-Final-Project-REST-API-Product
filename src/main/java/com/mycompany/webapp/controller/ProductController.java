@@ -1,6 +1,8 @@
 package com.mycompany.webapp.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mycompany.webapp.dto.Category;
 import com.mycompany.webapp.dto.CategoryLarge;
 import com.mycompany.webapp.dto.Color;
+import com.mycompany.webapp.dto.Exhibition;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Product;
 import com.mycompany.webapp.dto.ProductInfo;
@@ -254,5 +257,12 @@ public class ProductController {
 		}
 
 		return products;
+	}
+	
+	@GetMapping("/product/exhibition/list")
+	public List<Exhibition> getExhibition() {
+		log.info("실행");
+		
+		return productService.getExhibition();
 	}
 }

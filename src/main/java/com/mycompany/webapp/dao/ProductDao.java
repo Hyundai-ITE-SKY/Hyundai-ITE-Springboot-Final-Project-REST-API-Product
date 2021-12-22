@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import com.mycompany.webapp.dto.Category;
 import com.mycompany.webapp.dto.CategoryMedium;
 import com.mycompany.webapp.dto.Color;
+import com.mycompany.webapp.dto.Exhibition;
 import com.mycompany.webapp.dto.Product;
 import com.mycompany.webapp.dto.ProductInfo;
 import com.mycompany.webapp.dto.Stock;
@@ -36,4 +37,5 @@ public interface ProductDao {
 	public List<String> selectCategoryMedium(HashMap<String, Object> clargeCmedium);
 	public ProductInfo selectProuctInfo(@Param("pid")String pid, @Param("colorcode")String colorcode);
 	public Stock selectStockWithPidColorSize(@Param("pid")String pid, @Param("colorcode")String colorcode, @Param("size")String ssize);
+	public List<Exhibition> getExhibition();
 }

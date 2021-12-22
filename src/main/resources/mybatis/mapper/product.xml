@@ -254,6 +254,13 @@
 		AND ccolorcode = #{colorcode}
 		AND ssize = #{size}
 	</select>
+	
+	<select id="getExhibition" resultType="exhibition">
+		select exid, orderno, eximg 
+		from exhibition
+		order by orderno
+	</select>
+	
 </mapper>
 
 
