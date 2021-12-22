@@ -12,6 +12,7 @@
 		<typeAlias type="com.mycompany.webapp.dto.CategoryMedium" alias="categorymedium" />
 		<typeAlias type="com.mycompany.webapp.dto.ProductInfo" alias="pinfo" />
 		<typeAlias type="com.mycompany.webapp.dto.Exhibition" alias="exhibition" />
+		<typeAlias type="com.mycompany.webapp.dto.Review" alias="review" />
 	</typeAliases>
 </configuration>
 

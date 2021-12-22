@@ -17,6 +17,7 @@ import com.mycompany.webapp.dto.Exhibition;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Product;
 import com.mycompany.webapp.dto.ProductInfo;
+import com.mycompany.webapp.dto.Review;
 import com.mycompany.webapp.dto.Stock;
 
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +47,7 @@ public class ProductService {
 		log.info("대분류");
 		return productDao.selectProductsWithLarge(categoryPager);
 	}
-	
+
 	public List<Product> selectBestWithCategory(Category category) {
 		log.info("실행");
 
@@ -57,7 +58,7 @@ public class ProductService {
 		log.info("대분류");
 		return productDao.selectBestProductsWithLarge(category);
 	}
-	
+
 	public List<Product> selectNewWithCategory(Category category) {
 		log.info("실행");
 
@@ -73,7 +74,7 @@ public class ProductService {
 		log.info("실행");
 		return productDao.selectProductWithPno(pno);
 	}
-	
+
 	public Product selectWithPid(String pid) {
 		log.info("실행");
 		return productDao.selectProductWithPid(pid);
@@ -102,42 +103,52 @@ public class ProductService {
 	public List<Color> getProductColors(String pid) {
 		return productDao.selectProductColors(pid);
 	}
-		
+
 	@Transactional
 	public int updateStockPTotalAmount(Stock stock) {
 		productDao.updateStock(stock);
 		productDao.updateProductTotalAmount(stock);
-		
+
 		return 1;
 	}
-	
+
 	public CategoryLarge getCategory(String clarge) {
 		CategoryLarge categoryLarge = new CategoryLarge();
 		categoryLarge.setClarge(clarge);
-		
-		List<CategoryMedium> list =productDao.selectCategoryLarge(clarge);
-		
+
+		List<CategoryMedium> list = productDao.selectCategoryLarge(clarge);
+
 		HashMap<String, Object> clargeCmedium = new HashMap<>();
 		clargeCmedium.put("clarge", clarge);
-		
-		for(CategoryMedium c : list) {
+
+		for (CategoryMedium c : list) {
 			clargeCmedium.put("cmedium", c.getCmedium());
 			List<String> csmall = productDao.selectCategoryMedium(clargeCmedium);
 			c.setCsmall(csmall);
 		}
-		
+
 		categoryLarge.setCmedium(list);
-		
+
 		return categoryLarge;
 	}
 
 	public ProductInfo getProductInfo(String pid, String colorcode) {
-		return productDao.selectProuctInfo(pid,colorcode);
+		return productDao.selectProuctInfo(pid, colorcode);
 	}
+
 	public Stock selectStock(String pid, String colorcode, String ssize) {
 		return productDao.selectStockWithPidColorSize(pid, colorcode, ssize);
 	}
+
 	public List<Exhibition> getExhibition() {
 		return productDao.getExhibition();
+	}
+
+	public int createReview(Review review) {
+		return productDao.createReview(review);
+	}
+	
+	public List<Review> getReviewList(String pid) {
+		return productDao.getReviewList(pid);
 	}
 }

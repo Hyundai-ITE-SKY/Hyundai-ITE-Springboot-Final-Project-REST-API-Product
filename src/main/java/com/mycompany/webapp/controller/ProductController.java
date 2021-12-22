@@ -1,8 +1,6 @@
 package com.mycompany.webapp.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,7 +8,7 @@ import org.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mycompany.webapp.dto.Category;
@@ -20,6 +18,7 @@ import com.mycompany.webapp.dto.Exhibition;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Product;
 import com.mycompany.webapp.dto.ProductInfo;
+import com.mycompany.webapp.dto.Review;
 import com.mycompany.webapp.dto.Stock;
 import com.mycompany.webapp.service.ProductService;
 
@@ -144,20 +143,19 @@ public class ProductController {
 
 		return product;
 	}
-	
+
 	@PostMapping("/product/updatestock")
 	public int updateStock(Stock stock) {
 		log.info("실행");
 		Stock checkStock = productService.selectStock(stock.getPid(), stock.getCcolorcode(), stock.getSsize());
-		log.info("checkStock"+checkStock);
+		log.info("checkStock" + checkStock);
 		// 상품의 재고가 음수일 경우, 수량 구매시 상품 재고가 음수일 경우 return 0
-		if(checkStock.getSamount()<0 || checkStock.getSamount() - stock.getSamount()<0) {
+		if (checkStock.getSamount() < 0 || checkStock.getSamount() - stock.getSamount() < 0) {
 			return 0;
 		}
-		
+
 		return productService.updateStockPTotalAmount(stock);
 	}
-	
 
 	@GetMapping("/category/{clarge}")
 	public CategoryLarge getCategory(@PathVariable String clarge) {
@@ -215,7 +213,7 @@ public class ProductController {
 
 		return products;
 	}
-	
+
 	@GetMapping("/productlist/new/{clarge}")
 	public List<Product> getNewWithLarge(@PathVariable String clarge) {
 		log.info("실행");
@@ -258,11 +256,27 @@ public class ProductController {
 
 		return products;
 	}
-	
+
 	@GetMapping("/product/exhibition/list")
 	public List<Exhibition> getExhibition() {
 		log.info("실행");
-		
+
 		return productService.getExhibition();
+	}
+
+	@PostMapping("/product/review/create")
+	@ResponseBody
+	public int createReview(Review review) {
+		log.info("실행");
+
+		return productService.createReview(review);
+	}
+
+	@GetMapping("/product/review")
+	@ResponseBody
+	public List<Review> getReviewList(String pid) {
+		log.info("실행");
+
+		return productService.getReviewList(pid);
 	}
 }

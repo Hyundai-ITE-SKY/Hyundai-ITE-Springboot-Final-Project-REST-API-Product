@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mycompany.webapp.dao.ProductDao">
-	<select id="selectProductsWithLarge" parameterType="HashMap" resultType="product">
+	<select id="selectProductsWithLarge" parameterType="HashMap"
+		resultType="product">
 		<![CDATA[
 		SELECT rnum, pid, bname, clarge, cmedium, csmall,
 			   pno, pname, pprice, pdetail, pseason, ptotalamount
@@ -25,7 +26,8 @@
 		WHERE rnum >= #{pager.startRowNo}
 		]]>
 	</select>
-	<select id="selectProductsWithMedium" parameterType="HashMap" resultType="product">
+	<select id="selectProductsWithMedium" parameterType="HashMap"
+		resultType="product">
 		<![CDATA[
 		SELECT rnum, pid, bname, clarge, cmedium, csmall,
 			   pno, pname, pprice, pdetail, pseason, ptotalamount
@@ -48,7 +50,8 @@
 		WHERE rnum >= #{pager.startRowNo}
 		]]>
 	</select>
-	<select id="selectProductsWithSmall" parameterType="HashMap" resultType="product">
+	<select id="selectProductsWithSmall" parameterType="HashMap"
+		resultType="product">
 		<![CDATA[
 		SELECT rnum, pid, bname, clarge, cmedium, csmall,
 			   pno, pname, pprice, pdetail, pseason, ptotalamount
@@ -107,8 +110,8 @@
 	        WHERE ROWNUM <= 5
 		]]>
 	</select>
-	<select id="selectNewProductsWithLarge"
-		parameterType="category" resultType="product">
+	<select id="selectNewProductsWithLarge" parameterType="category"
+		resultType="product">
 		<![CDATA[
 			SELECT pid, bname, clarge, cmedium, csmall,
 			pno, pname, pprice, pdetail, pseason, ptotalamount
@@ -155,7 +158,8 @@
 		#{pno}
 		AND b.bno = p.bno
 	</select>
-	<select id="selectProductWithPid" parameterType="String" resultType="product">
+	<select id="selectProductWithPid" parameterType="String"
+		resultType="product">
 		SELECT p.pid as pid, b.bname as bname, p.clarge as clarge,
 		p.cmedium as cmedium, p.csmall as csmall,
 		p.pno as pno, p.pname as
@@ -167,7 +171,8 @@
 		#{pid}
 		AND b.bno = p.bno
 	</select>
-	<select id="countProductsWithLarge" parameterType="category" resultType="int">
+	<select id="countProductsWithLarge" parameterType="category"
+		resultType="int">
 		SELECT
 		COUNT(pno)
 		FROM product
@@ -186,7 +191,8 @@
 		cmedium = #{cmedium}
 		AND csmall LIKE '%'
 	</select>
-	<select id="countProductsWithSmall" parameterType="category" resultType="int">
+	<select id="countProductsWithSmall" parameterType="category"
+		resultType="int">
 		SELECT
 		COUNT(pno)
 		FROM product
@@ -195,14 +201,16 @@
 		cmedium = #{cmedium}
 		AND csmall = #{csmall}
 	</select>
-	<select id="selectProductColors" parameterType="String" resultType="color">
+	<select id="selectProductColors" parameterType="String"
+		resultType="color">
 		SELECT
 		pid, ccolorcode, cimage1, cimage2, cimage3,
 		ccolorimage, cmatchpid
 		FROM color
 		WHERE pid = #{pid}
 	</select>
-	<select id="selectProductStock" parameterType="HashMap" resultType="stock">
+	<select id="selectProductStock" parameterType="HashMap"
+		resultType="stock">
 		SELECT
 		pid, ccolorcode, ssize, samount
 		FROM stock
@@ -210,15 +218,18 @@
 		#{pid}
 		AND ccolorcode = #{colorcode}
 	</select>
-	
+
 	<update id="updateStock" parameterType="stock">
 		UPDATE stock
-		SET samount= samount - #{samount}, stotalamount = stotalamount + #{samount}
-		WHERE pid=#{pid} and ccolorcode=#{ccolorcode} and ssize=#{ssize}
+		SET samount=
+		samount - #{samount}, stotalamount = stotalamount + #{samount}
+		WHERE
+		pid=#{pid} and ccolorcode=#{ccolorcode} and ssize=#{ssize}
 	</update>
-	
+
 	<update id="updateProductTotalAmount" parameterType="stock">
-		UPDATE product
+		UPDATE
+		product
 		SET ptotalamount= ptotalamount + #{samount}
 		WHERE pid = #{pid}
 	</update>
@@ -246,21 +257,41 @@
 		and
 		p.pid=#{pid} and c.ccolorcode=#{colorcode}
 	</select>
-	
-	<select id="selectStockWithPidColorSize" parameterType="string"  resultType="stock">
+
+	<select id="selectStockWithPidColorSize" parameterType="string"
+		resultType="stock">
 		SELECT pid, ccolorcode, ssize, samount
 		FROM stock
-		WHERE pid = #{pid}
+		WHERE pid =
+		#{pid}
 		AND ccolorcode = #{colorcode}
 		AND ssize = #{size}
 	</select>
-	
+
 	<select id="getExhibition" resultType="exhibition">
-		select exid, orderno, eximg 
+		select exid, orderno,
+		eximg
 		from exhibition
 		order by orderno
 	</select>
+
+	<insert id="createReview" parameterType="review">
+		INSERT INTO review
+		(rno,
+		mid, mname, pid, pname, pcolor, psize, rdate, rrate, rprice,
+		rcomfortable, rtitle, rcontent)
+		VALUES
+		(rno.NEXTVAL, #{mid}, #{mname},
+		#{pid}, #{pname}, #{pcolor}, #{psize},
+		SYSDATE, #{rrate}, #{rprice}, #{rcomfortable}, #{rtitle}, #{rcontent})
+	</insert>
 	
+	<select id="getReviewList" parameterType="string" resultType="review">
+		select *
+		from review
+		where pid=#{pid}
+		order by rno
+	</select>
 </mapper>
 
 
