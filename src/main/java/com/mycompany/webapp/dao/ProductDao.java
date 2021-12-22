@@ -12,6 +12,7 @@ import com.mycompany.webapp.dto.Color;
 import com.mycompany.webapp.dto.Exhibition;
 import com.mycompany.webapp.dto.Product;
 import com.mycompany.webapp.dto.ProductInfo;
+import com.mycompany.webapp.dto.Review;
 import com.mycompany.webapp.dto.Stock;
 
 @Mapper
@@ -29,7 +30,6 @@ public interface ProductDao {
 	public List<Color> selectProductColors(String pid);
 	public Product selectProductWithPno(int pno);
 	public Product selectProductWithPid(String pid);
-//	public Stock selectProductStock(HashMap<String, Object> pidColorcode);
 	public int updateStock(Stock stock);
 	public int updateProductTotalAmount(Stock stock);
 	public List<Stock> selectProductStock(HashMap<String, Object> pidColorcode);
@@ -38,4 +38,6 @@ public interface ProductDao {
 	public ProductInfo selectProuctInfo(@Param("pid")String pid, @Param("colorcode")String colorcode);
 	public Stock selectStockWithPidColorSize(@Param("pid")String pid, @Param("colorcode")String colorcode, @Param("size")String ssize);
 	public List<Exhibition> getExhibition();
+	public int createReview(Review review);
+	public List<Review> getReviewList(String pid);
 }
