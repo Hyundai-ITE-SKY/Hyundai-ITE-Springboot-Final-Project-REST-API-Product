@@ -273,7 +273,6 @@ public class ProductController {
 	}
 
 	@GetMapping("/product/review")
-	@ResponseBody
 	public List<Review> getReviewList(String pid) {
 		log.info("실행");
 
